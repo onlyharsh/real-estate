@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
+import {Link} from 'react-router-dom'
 import {
   getDownloadURL,
   getStorage, ref, uploadBytesResumable,
@@ -179,6 +180,10 @@ export default function Profile() {
           {loading ? 'Updating...' : 'Update'}
       
         </button>
+
+        <Link className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-90" to={"/create-listing"}>
+          Create Listing
+        </Link>
      </form>
      <div className="flex justify-between mt-5">
      <span
@@ -192,6 +197,8 @@ export default function Profile() {
          className='text-red-700 cursor-pointer'>
           Sign out
         </span>
+       
+
       </div>
       <p className="text-red-700 mt-5">{error?error :''}</p>
       <p className="text-green-700 mt-5">{updateSuccess?"User updated successfully!":""}</p>
