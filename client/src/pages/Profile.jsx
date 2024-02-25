@@ -37,6 +37,7 @@ export default function Profile() {
   },[file]);
 
   const handleFileUpload = (file) => {
+    setFileUploadError(false);
     const storage = getStorage(app);
     const fileName = new Date().getTime() + file.name;
     const storageRef = ref(storage, fileName);
@@ -47,15 +48,20 @@ export default function Profile() {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        
+      
         setFilePerc(Math.round(progress));
       },
+     
       (error) => {
-        setFileUploadError(true);
+        setFileUploadError('Error Image upload (image must be less than 2 mb)');
       },
       () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>{
+          setFileUploadError('Image successfully uploaded!')
           setFormData({ ...formData, avatar: downloadURL })
+        }
+          
+          
         );
       }
     );
@@ -134,7 +140,7 @@ export default function Profile() {
       className="rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2" 
       />
        
-       <p className='text-sm self-center'>
+       {/* <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700'>
               Error Image upload (image must be less than 2 mb)
@@ -146,7 +152,33 @@ export default function Profile() {
           ) : (
             ''
           )}
+        </p> */}
+
+        <p className='text-sm self-center'>
+          {  fileUploadError ? (
+            fileUploadError=='Image successfully uploaded!'?(
+                <span className='text-green-700'>
+                {fileUploadError}
+              </span>  
+             
+            ):(
+                <span className='text-red-700'>
+            {fileUploadError}
+          </span> 
+            )
+          
+   ) : 
+          filePerc > 0 && filePerc < 100 ? (
+            <span className='text-slate-700'>{`Uploading images:${filePerc}%`}</span>
+          ) :filePerc===100?(
+            <span className='text-purple-700 text-sm'>wait..</span>
+          ):
+          ('')
+         
+            
+          }
         </p>
+
 
 
         <input

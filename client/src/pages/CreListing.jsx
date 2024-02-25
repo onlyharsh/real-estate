@@ -21,17 +21,19 @@ export default function CreateListing() {
     type: 'rent',
     bedrooms: 1,
     bathrooms: 1,
-    regularPrice: 50,
+    regularPrice: 500,
     discountPrice: 0,
     offer: false,
     parking: false,
     furnished: false,
   });
+ 
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(formData);
+  const [filePerc,setFilePerc]=useState(0);
+ 
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
@@ -47,7 +49,7 @@ export default function CreateListing() {
             ...formData,
             imageUrls: formData.imageUrls.concat(urls),
           });
-          setImageUploadError(false);
+          setImageUploadError('Image successfully uploaded!');
           setUploading(false);
         })
         .catch((err) => {
@@ -71,7 +73,8 @@ export default function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          
+            setFilePerc(Math.round(progress));
         },
         (error) => {
           reject(error);
@@ -158,7 +161,7 @@ export default function CreateListing() {
       <h1 className='text-3xl font-semibold text-center my-7'>
         Create a Listing
       </h1>
-      <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
+      <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-20 '>
         <div className='flex flex-col gap-4 flex-1'>
           <input
             type='text'
@@ -253,7 +256,7 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bedrooms}
               />
-              <p>Beds</p>
+              <p>Bedroom</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
@@ -266,14 +269,14 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
-              <p>Baths</p>
+              <p>Bathroom</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
                 type='number'
                 id='regularPrice'
-                min='50'
-                max='10000000'
+                min='500'
+                max='10000000000'
                 required
                 className='p-3 border border-gray-300 rounded-lg'
                 onChange={handleChange}
@@ -282,7 +285,7 @@ export default function CreateListing() {
               <div className='flex flex-col items-center'>
                 <p>Regular price</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>($ / month)</span>
+                  <span className='text-xs'>( <b>₹</b> / month)</span>
                 )}
               </div>
             </div>
@@ -302,7 +305,7 @@ export default function CreateListing() {
                   <p>Discounted price</p>
 
                   {formData.type === 'rent' && (
-                    <span className='text-xs'>($ / month)</span>
+                    <span className='text-xs'>( <b>₹</b>/ month)</span>
                   )}
                 </div>
               </div>
@@ -310,14 +313,19 @@ export default function CreateListing() {
           </div>
         </div>
         <div className='flex flex-col flex-1 gap-4'>
-       <marquee behavior="scroll" direction="left">
-       <p className='font-semibold'>
-            Note:
-            <span className='font-normal text-gray-600 ml-2'>
-              The first image will be the cover image & you can upload maximum 6 pictures
-            </span>
-          </p>
-        </marquee>   
+
+        <p className='font-semibold mx-2 text-gray-800'>Note:</p>
+        <marquee behavior="scroll" direction="up" scrollamount="3">
+  <div className='font-semibold '>
+      
+    <div className='font-normal text-gray-600 ml-2'>
+      <div className='font-semibold'>I. <span className='font-normal'>The first image will be the cover image.</span></div> 
+      <div className='font-semibold'>II. <span className='font-normal'>You can upload a maximum of 6 pictures.</span></div>
+      <div className='font-semibold'>III. <span className='font-normal'>Each picture should have a maximum size of 2MB.</span></div> 
+    </div>
+  </div>
+</marquee>
+
           <div className='flex gap-4'>
             <input
               onChange={(e) => setFiles(e.target.files)}
@@ -335,10 +343,39 @@ export default function CreateListing() {
             >
               {uploading ? 'Uploading...' : 'Upload'}
             </button>
+
+           
           </div>
-          <p className='text-red-700 text-sm'>
+           
+          <p className='text-sm self-center'>
+          {  imageUploadError ? (
+            imageUploadError=='Image successfully uploaded!'?(
+                <span className='text-green-700'>
+                {imageUploadError}
+              </span>
+            ):(
+                <span className='text-red-700'>
+            {imageUploadError}
+          </span>
+            )
+            
+          ) : 
+          filePerc > 0 && filePerc < 100 ? (
+            <span className='text-slate-700'>{`Uploading images:${filePerc}%`}</span>
+          ) :filePerc===100?(
+            <span className='text-purple-700 text-sm'>wait..</span>
+          ):
+          ('')
+         
+            
+          }
+        </p>
+
+     
+
+          {/* <p className='text-red-700 text-sm'>
             {imageUploadError && imageUploadError}
-          </p>
+          </p> */}
           {formData.imageUrls.length > 0 &&
             formData.imageUrls.map((url, index) => (
               <div
