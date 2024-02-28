@@ -41,7 +41,7 @@ export default function Header() {
 
         {/* Sidebar for smaller screens */}
         {showSidebar && (
-          <div className="sm:hidden absolute right-0 top-0 h-screen bg-white w-64">
+          <div className="sm:hidden absolute right-0 top-0 h-screen bg-white w-64 ">
             <button className="absolute top-2 right-2 text-slate-600" onClick={closeSidebar}>
               Close
             </button>
