@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaSearch, FaBars } from 'react-icons/fa';
+import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -7,13 +7,16 @@ export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [showSidebar, setShowSidebar] = useState(false);
 
+
   const closeSidebar = () => {
     setShowSidebar(false);
   };
 
+  console.log(showSidebar)
+
   return (
     <header className="shadow-md bg-slate-200">
-      <div className="flex items-center justify-between max-w-6xl p-3 mx-auto">
+      <div className="flex items-center justify-between max-w-6xl p-4 mx-auto">
         <Link to="/" onClick={closeSidebar}> {/* Close sidebar when navigating to home */}
           <h1 className="flex-wrap text-sm font-bold sm:text-xl">
             <span className="text-slate-500">HRS </span>
@@ -21,15 +24,7 @@ export default function Header() {
           </h1>
         </Link>
 
-        {/* Search bar */}
-        <form className="flex items-center p-2 sm:p-3 rounded-lg bg-slate-100">
-          <input
-            type="text"
-            placeholder="Search.."
-            className="w-50 bg-transparent outline-none sm:w-84"
-          />
-          <FaSearch className="text-slate-600" />
-        </form>
+      
 
         {/* Toggle sidebar button for smaller screens */}
         <button
@@ -41,9 +36,10 @@ export default function Header() {
 
         {/* Sidebar for smaller screens */}
         {showSidebar && (
-          <div className="sm:hidden absolute right-0 top-0 h-screen bg-white w-64 ">
+          
+          <div className="sm:hidden absolute right-0 top-0 h-screen bg-red-400 w-[230px] z-30">
             <button className="absolute top-2 right-2 text-slate-600" onClick={closeSidebar}>
-              Close
+              <FaTimes/>
             </button>
             <ul className="flex flex-col gap-4 p-4">
               <li className="text-slate-700 hover:underline">
