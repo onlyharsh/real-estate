@@ -19,7 +19,7 @@ export default function Header() {
       <div className="flex items-center justify-between max-w-6xl p-4 mx-auto">
         <Link to="/" onClick={closeSidebar}> {/* Close sidebar when navigating to home */}
           <h1 className="flex-wrap text-sm font-bold sm:text-xl">
-            <span className="text-slate-500">HRS </span>
+            <span className="text-slate-500">HARS </span>
             <span className="text-slate-700">Estate</span>
           </h1>
         </Link>

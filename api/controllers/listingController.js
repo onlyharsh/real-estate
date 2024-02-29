@@ -67,7 +67,7 @@ export const getListings = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
-
+   
     if (offer === undefined || offer === 'false') {
       offer = { $in: [false, true] };
     }
@@ -91,13 +91,15 @@ export const getListings = async (req, res, next) => {
     }
 
     const searchTerm = req.query.searchTerm || '';
-
+    console.log(searchTerm)
     const sort = req.query.sort || 'createdAt';
 
     const order = req.query.order || 'desc';
 
     const listings = await Listing.find({
-      name: { $regex: searchTerm, $options: 'i' },
+      description: { $regex: searchTerm, $options: 'i' },
+      // desc: { $regex: searchTerm, $options: 'i' },
+      // address: { $regex: searchTerm, $options: 'i' },
       offer,
       furnished,
       parking,
