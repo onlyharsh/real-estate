@@ -22,12 +22,14 @@ const HomePage = () => {
         <h1 className='text-slate-700 font-bold mt-[50px] sm:mt-[80px] text-3xl lg:text-6xl'>
           Find your ideal <span className='text-slate-500'>home </span>at
           <br />
+         
           {/* <span className='text-slate-500'>HRS</span> Estate */}
           <Type/>
         </h1>
         <div className='text-gray-500 text-xs sm:text-sm'>
         Welcome to HARS Estate, your destination for finding your dream home. 
           <br />
+          
          Explore our diverse range of properties and discover your perfect place to live today!
         </div>
         <div className="text-center flex ">

@@ -19,7 +19,7 @@ export default function Header() {
       <div className="flex items-center justify-between max-w-6xl p-4 mx-auto">
         <Link to="/" onClick={closeSidebar}> {/* Close sidebar when navigating to home */}
           <h1 className="flex-wrap text-sm font-bold sm:text-xl">
-            <span className="text-slate-500">HARS </span>
+          <span style={{ color: '#ff0000' }}>HARS </span>
             <span className="text-slate-700">Estate</span>
           </h1>
         </Link>
@@ -31,14 +31,14 @@ export default function Header() {
           className="sm:hidden focus:outline-none"
           onClick={() => setShowSidebar(!showSidebar)}
         >
-          <FaBars className="text-slate-600" />
+          <FaBars className="text-slate-700" />
         </button>
 
         {/* Sidebar for smaller screens */}
         {showSidebar && (
           
           <div className="sm:hidden absolute right-0 top-0 h-screen bg-red-400 w-[230px] z-30">
-            <button className="absolute top-2 right-2 text-slate-600" onClick={closeSidebar}>
+            <button className="absolute top-2 right-2 text-slate-700" onClick={closeSidebar}>
               <FaTimes/>
             </button>
             <ul className="flex flex-col gap-4 p-4">
