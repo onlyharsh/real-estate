@@ -75,7 +75,7 @@ export default function Listing() {
           
 
         
-          <div className="flex items-center justify-between sm:justify-center relative mb-8">
+          <div className="flex items-center  sm:justify-center relative mb-8">
             <FontAwesomeIcon
               icon={faCircleArrowLeft}
               className="text-2xl text-gray-200 sm:text-gray-600 cursor-pointer ml-1 sm:mr-[1100px] absolute z-20 sm:text-4xl   "
@@ -88,10 +88,10 @@ export default function Listing() {
             </div>
             <FontAwesomeIcon
               icon={faCircleArrowRight}
-              className="text-2xl text-gray-200 sm:text-gray-600 cursor-pointer ml-[390px] sm:ml-[1100px] absolute z-20 sm:text-4xl "
+              className="text-2xl text-gray-200 sm:text-gray-600 cursor-pointer ml-[270px] sm:ml-[1100px] absolute z-20 sm:text-4xl "
               onClick={() => handleMove("r")}
             />
-              <div className='fixed  top-[100px] sm:top-[110px] right-[35px] sm:right-[256px] z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer'>
+              <div className='fixed  top-[87px] sm:top-[100px] right-[35px] sm:right-[256px] z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer'>
             <FaShare
               className='text-gray-600'
               onClick={() => {
@@ -104,7 +104,7 @@ export default function Listing() {
             />
           </div>
           {copied && (
-            <p className='fixed top-[20%] sm:top-[16%] right-[7%] sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
+            <p className='fixed top-[5%] sm:top-[16%] right-[17%] sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
               Link copied!
             </p>
           )}
