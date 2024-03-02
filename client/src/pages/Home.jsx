@@ -1,12 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import Type from '../components/Type';
+import ListingItem from '../components/ListingItem';
+import Footer from '../components/Footer';
 
 const HomePage = () => {
+  const [offerListings, setOfferListings] = useState([]);
+  const [saleListings, setSaleListings] = useState([]);
+  const [rentListings, setRentListings] = useState([]);
+
   const [serachTerm,setSearchTerm]=useState('')
    const navigate=useNavigate();
 
+
+
+   console.log(offerListings);
+   useEffect(() => {
+     const fetchOfferListings = async () => {
+       try {
+         const res = await fetch('/api/listing/get?offer=true&limit=4');
+         const data = await res.json();
+         setOfferListings(data);
+         fetchRentListings();
+       } catch (error) {
+         console.log(error);
+       }
+     };
+     const fetchRentListings = async () => {
+       try {
+         const res = await fetch('/api/listing/get?type=rent&limit=4');
+         const data = await res.json();
+         setRentListings(data);
+         fetchSaleListings();
+       } catch (error) {
+         console.log(error);
+       }
+     };
+ 
+     const fetchSaleListings = async () => {
+       try {
+         const res = await fetch('/api/listing/get?type=sale&limit=4');
+         const data = await res.json();
+         setSaleListings(data);
+       } catch (error) {
+         log(error);
+       }
+     };
+     fetchOfferListings();
+   }, []);
+ 
   
  
 
@@ -49,17 +92,65 @@ const HomePage = () => {
           className="flex-1 px-3 py-3 ml-2  sm:py-4 border border-gray-300 rounded-l-md shadow-md focus:outline-none  text-sm sm:text-base border-r-0" 
           value={serachTerm}
           onChange={(e)=>setSearchTerm(e.target.value)}
-        
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+          }}
 
         />
         <button 
-          className="flex items-center border-l-0 mr-2 justify-center px-4 sm:px-11  bg-slate-300 text-slate-700 rounded-r-md shadow-md hover:bg-slate-400 focus:outline-none  text-sm sm:text-base"
+          className="flex items-center border-l-0 mr-2 justify-center px-4 sm:px-11   bg-red-200 text-slate-700 rounded-r-md shadow-md hover:bg-slate-400 focus:outline-none  text-sm sm:text-base"
           onClick={handleSubmit}
         >
           <FaSearch className="text-slate-700" />
           <span className="ml-2">Search</span>
         </button>
       </div>
+
+
+      <div className='max-w-5xl mx-auto p-3 flex flex-col gap-8 my-10'>
+        {offerListings && offerListings.length > 0 && (
+          <div className=''>
+            <div className='my-3'>
+              <h2 className='text-2xl font-semibold text-slate-600'>Recent offers</h2>
+              <Link className='text-sm text-blue-800 hover:underline' to={'/search?offer=true'}>Show more offers</Link>
+            </div>
+            <div className='flex flex-wrap gap-4'>
+              {offerListings.map((listing) => (
+                <ListingItem listing={listing} key={listing._id} />
+              ))}
+            </div>
+          </div>
+        )}
+        {rentListings && rentListings.length > 0 && (
+          <div className=''>
+            <div className='my-3'>
+              <h2 className='text-2xl font-semibold text-slate-600'>Recent places for rent</h2>
+              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=rent'}>Show more places for rent</Link>
+            </div>
+            <div className='flex flex-wrap gap-4'>
+              {rentListings.map((listing) => (
+                <ListingItem listing={listing} key={listing._id} />
+              ))}
+            </div>
+          </div>
+        )}
+        {saleListings && saleListings.length > 0 && (
+          <div className=''>
+            <div className='my-3'>
+              <h2 className='text-2xl font-semibold text-slate-600'>Recent places for sale</h2>
+              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=sale'}>Show more places for sale</Link>
+            </div>
+            <div className='flex flex-wrap gap-4'>
+              {saleListings.map((listing) => (
+                <ListingItem listing={listing} key={listing._id} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      <Footer/>
     </div>
   );
 }

@@ -270,7 +270,7 @@ export default function Profile() {
      <div className='flex flex-col mt-0 flex-1 gap-4'>
       <img className="w-auto object-cover h-50  rounded-md" src="../../../public/image3.jpg" alt="" />
      <Link
-          className="bg-green-700 text-white p-3 mt-0.5 rounded-lg uppercase text-center  hover:opacity-90"
+          className="bg-green-700 text-white p-3 mt-[1px] rounded-lg uppercase text-center  hover:opacity-90"
           to={"/create-listing"}
         >
           Create Listing
@@ -278,7 +278,7 @@ export default function Profile() {
 
        
    <button  onClick={handleShowListings} className='text-green-700 mt-0 sm:mt-5 w-full'>
-        Show Listings
+        Show your listings
       </button>
       <p className='text-red-700 mt-5'>
         {showListingsError ? 'Error showing listings' : ''}

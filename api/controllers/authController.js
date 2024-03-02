@@ -32,6 +32,7 @@ export const signin = async (req, res, next) => {
         .status(200)
         .json(rest);
     } catch (error) {
+      
       next(error);
     }
   };
@@ -83,6 +84,3 @@ export const signin = async (req, res, next) => {
 
     }
   }
-
-
-

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { FaSearch, FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const [showSidebar, setShowSidebar] = useState(false);
+  
 
 
   const closeSidebar = () => {
@@ -37,18 +37,13 @@ export default function Header() {
         {/* Sidebar for smaller screens */}
         {showSidebar && (
           
-          <div className="sm:hidden absolute right-0 top-0 h-screen bg-red-400 w-[230px] z-30">
-            <button className="absolute top-2 right-2 text-slate-700" onClick={closeSidebar}>
+          <div className="sm:hidden absolute right-0 top-0 h-screen bg-white w-[230px] z-30">
+            <button className="absolute top-4 right-4 text-slate-700" onClick={closeSidebar}>
               <FaTimes/>
             </button>
             <ul className="flex flex-col gap-4 p-4">
-              <li className="text-slate-700 hover:underline">
-                <Link to="/" onClick={closeSidebar}>Home</Link>
-              </li>
-              <li className="text-slate-700 hover:underline">
-                <Link to="/about" onClick={closeSidebar}>About</Link>
-              </li>
-              <li className="text-slate-700 hover:underline">
+             
+            <li className="text-slate-700 hover:underline ">
                 <Link to="/profile" onClick={closeSidebar}>
                   {currentUser ? (
                     <img
@@ -61,12 +56,20 @@ export default function Header() {
                   )}
                 </Link>
               </li>
+
+              <li className="text-slate-700 hover:underline">
+                <Link to="/" onClick={closeSidebar}>Home</Link>
+              </li>
+              <li className="text-slate-700 hover:underline">
+                <Link to="/about" onClick={closeSidebar}>About</Link>
+              </li>
+              
             </ul>
           </div>
         )}
 
         {/* Sidebar for larger screens */}
-        <ul className="hidden sm:flex gap-4">
+        <ul className="hidden sm:flex gap-6">
           <li className="text-slate-700 hover:underline">
             <Link to="/" onClick={closeSidebar}>Home</Link>
           </li>
