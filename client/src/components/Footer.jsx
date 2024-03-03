@@ -18,13 +18,13 @@ const Footer = () => {
           <ul className="footer-links">
   <li className='flex items-center gap-2 text-xs sm:text-[15px]'>
     <FaHome />
-    <Link to="#">
+    <Link to="/">
       <span >Home</span>
     </Link>
   </li>
   <li className='flex items-center gap-2 text-xs sm:text-[15px] mt-2'>
     <FaInfoCircle />
-    <Link to="#">
+    <Link to="/about">
       <span >About Us</span>
     </Link>
   </li>

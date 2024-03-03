@@ -1,8 +1,10 @@
 import React from 'react';
+import Footer from '../components/Footer';
 
 export default function About() {
   return (
-    <div className='py-10 px-4 mt-5 max-w-5xl mx-auto relative'>
+    <div className='bg-cover bg-center h-[410px] sm:h-[500px]'>
+     <div className='py-10 px-4 mt-5 max-w-5xl mx-auto relative'>
       <h1 className='text-3xl font-bold mb-4 text-slate-800'>Discover <span style={{ color: '#ff0000' }}>HARS</span> Estate</h1>
       <p className='mb-4 text-slate-700'>Welcome to HARS Estate, where every property tells a unique story.</p>
       <p className='mb-4 text-slate-700'>
@@ -27,7 +29,10 @@ export default function About() {
      
       
 
-     
+    
     </div>
+    <Footer/>
+    </div>
+   
   );
 }

@@ -3,9 +3,9 @@ import bcryptjs from 'bcryptjs'
 import jwt  from "jsonwebtoken";
 import { errorHandler } from "../utils/error.js";
 export const signup=async(req,res,next)=>{
-    const {username,email,password}=req.body;
+    const {username,email,password,phone}=req.body;
     const hashPassword=bcryptjs.hashSync(password,10);
-    const newUser=new User({ username, email, password:hashPassword});
+    const newUser=new User({ username, email, password:hashPassword,phone});
     try{
         await newUser.save();
         res.status(201).json({
@@ -60,6 +60,7 @@ export const signin = async (req, res, next) => {
             Math.random().toString(36).slice(-4),
           email: req.body.email,
           password: hashedPassword,
+          phone: '',
           avatar: req.body.photo,
         });
         await newUser.save();

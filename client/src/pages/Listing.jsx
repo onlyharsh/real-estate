@@ -71,51 +71,55 @@ export default function Listing() {
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
-        <div>
-          
-
-        
-          <div className="flex items-center  sm:justify-center relative mb-8">
-            <FontAwesomeIcon
-              icon={faCircleArrowLeft}
-              className="text-2xl text-gray-200 sm:text-gray-600 cursor-pointer ml-1 sm:mr-[1100px] absolute z-20 sm:text-4xl   "
-              onClick={() => handleMove("l")}
-            />
-            <div className="h-[350px] sm:h-[550px] w-full sm:w-[70%] relative">
-              {listing.imageUrls && (
-                <img src={listing.imageUrls[slideNumber]} alt="" className="w-full h-full object-cover rounded-md" />
-              )}
-            </div>
-            <FontAwesomeIcon
-              icon={faCircleArrowRight}
-              className="text-2xl text-gray-200 sm:text-gray-600 cursor-pointer ml-[270px] sm:ml-[1100px] absolute z-20 sm:text-4xl "
-              onClick={() => handleMove("r")}
-            />
-              <div className='fixed  top-[87px] sm:top-[100px] right-[35px] sm:right-[256px] z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer'>
-            <FaShare
-              className='text-gray-600'
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                setCopied(true);
-                setTimeout(() => {
-                  setCopied(false);
-                }, 2000);
-              }}
-            />
-          </div>
-          {copied && (
-            <p className='fixed top-[5%] sm:top-[16%] right-[17%] sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
-              Link copied!
-            </p>
-          )}
-          </div>
+         <div>
+          <div>
+         <div className="relative">
+           <div className="flex items-center h-[350px] sm:h-[550px] w-full mx-auto sm:w-[70%]">
+             <FontAwesomeIcon
+               icon={faCircleArrowLeft}
+               onClick={() => handleMove("l")}
+               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute left-0 sm:left-[222px] z-20"
+             />
+             {listing.imageUrls && (
+               <img
+                 src={listing.imageUrls[slideNumber]}
+                 alt=""
+                 className="w-full h-full object-cover rounded-md"
+               />
+             )}
+             <FontAwesomeIcon
+               icon={faCircleArrowRight}
+               onClick={() => handleMove("r")}
+               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute right-0 sm:right-[222px] z-20"
+             />
+           </div>
+           <div className="absolute right-1 sm:right-[222px] top-1 z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer">
+             <FaShare
+               className="text-gray-600"
+               onClick={() => {
+                 navigator.clipboard.writeText(window.location.href);
+                 setCopied(true);
+                 setTimeout(() => {
+                   setCopied(false);
+                 }, 2000);
+               }}
+             />
+           </div>
+         </div>
+         {copied && (
+           <p className='fixed top-[130px] sm:top-[16%] right-8 sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
+             Link copied!
+           </p>
+         )}
+       </div>
+     
 
         
          
           <div className='max-w-5xl mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
           <h2 className='text-2xl font-semibold text-gray-800'>
-  {listing.name} - <b>₹</b>{listing.offer ? (+listing.regularPrice - +listing.discountPrice) : listing.regularPrice.toLocaleString('en-US')}
-  {listing.type === 'rent' && ' / month'}
+  {listing.name} @ <span className='text-3xl'> <b>₹</b>{listing.offer ? (+listing.regularPrice - +listing.discountPrice) : listing.regularPrice.toLocaleString('en-US')}
+  {listing.type === 'rent' && ' / month'}</span>
 </h2>
   <p className='flex items-center gap-2 text-gray-600 text-sm'>
     <FaMapMarkerAlt className='text-green-700' />

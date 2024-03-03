@@ -34,11 +34,13 @@ export default function OAuth() {
   };
   return (
     <button
-      onClick={handleGoogleClick}
-      type='button'
-      className='bg-red-700 text-white p-3 rounded-lg uppercase hover:opacity-95'
-    >
-      Continue with google
-    </button>
+    onClick={handleGoogleClick}
+    type='button'
+    className='flex items-center justify-center gap-2 bg-white-700 text-gray-700 outline p-3 rounded-lg uppercase hover:opacity-95'
+  >
+    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" className="w-6 h-6" />
+    Continue with Google
+  </button>
+  
   );
 }

@@ -19,8 +19,9 @@ import {
   signOutUserStart,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
-import ListModal from "../components/ListModal";
+
 import { Modal } from "@mantine/core";
+import Footer from "../components/Footer";
 
 export default function Profile() {
   const fileRef = useRef(null);
@@ -175,7 +176,8 @@ export default function Profile() {
     }
   };
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
+       <main className="p-3 max-w-4xl mx-auto">
     <Modal opened={opened} onClose={close} >
     { userListings && userListings.length > 0 && (
         <div className='flex flex-col gap-4'>
@@ -270,7 +272,7 @@ export default function Profile() {
 
         <input
           type="text"
-          placeholder="username"
+          placeholder="Username"
           defaultValue={currentUser.username}
           id="username"
           className="mt-4 border p-3 rounded-lg"
@@ -278,7 +280,7 @@ export default function Profile() {
         />
         <input
           type="email"
-          placeholder="email"
+          placeholder="Email"
           id="email"
           defaultValue={currentUser.email}
           className="border p-3 rounded-lg"
@@ -286,9 +288,16 @@ export default function Profile() {
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           onChange={handleChange}
           id="password"
+          className="border p-3 rounded-lg"
+        />
+         <input
+          type="phone"
+          placeholder="Contact No."
+          onChange={handleChange}
+          id="phone"
           className="border p-3 rounded-lg"
         />
 
@@ -341,6 +350,9 @@ export default function Profile() {
       
 
     </main>
+    <Footer/>
+    </div>
+   
   );
 }
 

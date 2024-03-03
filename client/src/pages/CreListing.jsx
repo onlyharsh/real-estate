@@ -8,6 +8,7 @@ import {
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 export default function CreateListing() {
   const { currentUser } = useSelector((state) => state.user);
@@ -26,6 +27,7 @@ export default function CreateListing() {
     offer: false,
     parking: false,
     furnished: false,
+    phone:"",
   });
 
   const [imageUploadError, setImageUploadError] = useState(false);
@@ -157,7 +159,8 @@ export default function CreateListing() {
     }
   };
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
+     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
         Create Listing
       </h1>
@@ -177,6 +180,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.name}
           />
+          
           <textarea
             type="text"
             placeholder="Description"
@@ -414,5 +418,8 @@ export default function CreateListing() {
         </div>
       </form>
     </main>
+    <Footer/>
+    </div>
+    
   );
 }
