@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
+import {toast} from 'react-toastify'
 import {
   getDownloadURL,
   getStorage,
@@ -89,13 +90,15 @@ export default function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
+        toast.error("Failed to update user profile!");
         dispatch(updateUserFailure(data.message));
         return;
       }
-
+       toast.success("Profile updated successfully")
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
+      toast.error("Something went wrong");
       dispatch(updateUserFailure(error.message));
     }
   };
@@ -108,11 +111,14 @@ export default function Profile() {
       });
       const data = await res.json();
       if (data.success === false) {
+        toast.error("Failed to delete account");
         dispatch(deleteUserFailure(data.message));
         return;
       }
+      toast.success('Account deleted successfully');
       dispatch(deleteUserSuccess(data));
     } catch (error) {
+      toast.error("Error deleting account");
       dispatch(deleteUserFailure(error.message));
     }
   };
@@ -123,11 +129,15 @@ export default function Profile() {
       const res = await fetch("/api/auth/signout");
       const data = await res.json();
       if (data.success === false) {
+        toast.error("Sign out failed")
         dispatch(deleteUserFailure(data.message));
+
         return;
       }
+      toast.success("Logged Out Successfully!");
       dispatch(deleteUserSuccess(data));
     } catch (error) {
+      toast.error("something went wrong")
       dispatch(deleteUserFailure(data.message));
     }
   };
@@ -316,7 +326,7 @@ export default function Profile() {
           Delete account
         </span>
         <span onClick={handleSignOut} className="text-red-700 cursor-pointer">
-          Sign out
+          Log out
         </span>
       </div>
       <p className="text-red-700 mt-5">{error ? error : ""}</p>

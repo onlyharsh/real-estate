@@ -10,7 +10,8 @@ import CreListing from './pages/CreListing';
 import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search'
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
@@ -39,6 +40,17 @@ export default function App() {
         </Route>
 
       </Routes>
+      <ToastContainer
+        className="flex flex-col  fixed bottom-10 right-10 z-50"
+        toastClassName="bg-red-100 text-gray-800 font-semibold rounded-md shadow-md p-4 mb-4"
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        closeButton={false}
+        pauseOnHover={false}
+        draggable={false}
+        draggablePercent={60}
+      />
     </BrowserRouter>
   
   );

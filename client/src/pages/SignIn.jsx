@@ -8,7 +8,7 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../components/OAuth";
 import Footer from "../components/Footer";
-
+import {toast} from "react-toastify"
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -36,19 +36,21 @@ export default function SignIn() {
       console.log(data);
       if (data.success === false) {
         dispatch(signInFailure(data.message));
-
+        toast.error(data.message)
         return;
       }
+      toast.success("Logged in successfully")
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error.message));
+      toast.error(error.message)
+      // dispatch(signInFailure(error.message));
     }
   };
   return (
     <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
         <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign In</h1>
+      <h1 className="text-3xl text-center font-semibold my-7">Log In</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="email"
@@ -69,7 +71,7 @@ export default function SignIn() {
           disabled={loading}
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? "Loading..." : "Sign In"}
+          {loading ? "Loading..." : "Log In"}
         </button>
         <OAuth />
       </form>
@@ -79,7 +81,7 @@ export default function SignIn() {
           <span className="text-blue-700">Sign up</span>
         </Link>
       </div>
-      {error && <p className="text-red-500 mt-5">{error}</p>}
+      {/* {error && <p className="text-red-500 mt-5">{error}</p>} */}
     </div>
     <Footer/>
     </div>
