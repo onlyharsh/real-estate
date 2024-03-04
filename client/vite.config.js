@@ -7,6 +7,7 @@ export default defineConfig({
     proxy:{
       '/api':{
         target:'https://trendyhomes.onrender.com',
+        // target:'http://localhost:3000',
         secure: false,
       }
     }

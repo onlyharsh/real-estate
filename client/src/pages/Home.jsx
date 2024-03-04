@@ -78,7 +78,7 @@ const HomePage = () => {
         <div className="text-center flex ">
           <Link
             to={'/search'}
-            className='inline-block px-4 py-4 bg-red-200 text-slate-700 font-bold rounded-md hover:bg-red-300'
+            className='inline-block px-4 py-4 bg-red-200 text-gray-700 font-bold rounded-md hover:bg-red-300'
           >
             Let's get started...
           </Link>
@@ -100,10 +100,10 @@ const HomePage = () => {
 
         />
         <button 
-          className="flex items-center border-l-0 mr-2 justify-center px-4 sm:px-11   bg-red-200 text-slate-700 rounded-r-md shadow-md hover:bg-slate-400 focus:outline-none  text-sm sm:text-base"
+          className="flex items-center border-l-0 mr-2 justify-center px-4 sm:px-11   bg-slate-700 text-gray-100 rounded-r-md shadow-md hover:bg-slate-600 focus:outline-none  text-sm sm:text-base"
           onClick={handleSubmit}
         >
-          <FaSearch className="text-slate-700" />
+          <FaSearch className="text-gray-100" />
           <span className="ml-2">Search</span>
         </button>
       </div>

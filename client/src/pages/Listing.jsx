@@ -19,6 +19,7 @@ import {
   FaParking,
   FaShare,
 } from 'react-icons/fa';
+import Footer from '../components/Footer';
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
@@ -65,7 +66,8 @@ export default function Listing() {
   };
 
   return (
-    <main className="p-8">
+    <div className='bg-cover bg-center h-[410px] sm:h-[500px]'>
+    <main className="p-2 mt-1">
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
@@ -78,7 +80,7 @@ export default function Listing() {
              <FontAwesomeIcon
                icon={faCircleArrowLeft}
                onClick={() => handleMove("l")}
-               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute left-0 sm:left-[222px] z-20"
+               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute left-0 sm:left-[229px] z-20"
              />
              {listing.imageUrls && (
                <img
@@ -90,10 +92,10 @@ export default function Listing() {
              <FontAwesomeIcon
                icon={faCircleArrowRight}
                onClick={() => handleMove("r")}
-               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute right-0 sm:right-[222px] z-20"
+               className="text-2xl sm:text-4xl text-gray-200 sm:text-gray-600 cursor-pointer absolute right-0 sm:right-[229px] z-20"
              />
            </div>
-           <div className="absolute right-1 sm:right-[222px] top-1 z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer">
+           <div className="absolute right-1 sm:right-[229px] top-1 z-10 border rounded-full w-8 sm:w-12 h-8 sm:h-12 flex justify-center items-center bg-gray-200 cursor-pointer">
              <FaShare
                className="text-gray-600"
                onClick={() => {
@@ -118,8 +120,8 @@ export default function Listing() {
          
           <div className='max-w-5xl mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
           <h2 className='text-2xl font-semibold text-gray-800'>
-  {listing.name} @ <span className='text-3xl'> <b>₹</b>{listing.offer ? (+listing.regularPrice - +listing.discountPrice) : listing.regularPrice.toLocaleString('en-US')}
-  {listing.type === 'rent' && ' / month'}</span>
+  {listing.name} @ <span className='text-3xl text-red-600'> ₹{listing.offer ? (+listing.regularPrice - +listing.discountPrice) : listing.regularPrice.toLocaleString('en-US')}
+  {listing.type === 'rent' && ' /month'}</span>
 </h2>
   <p className='flex items-center gap-2 text-gray-600 text-sm'>
     <FaMapMarkerAlt className='text-green-700' />
@@ -171,5 +173,7 @@ export default function Listing() {
         </div>
       )}
     </main>
+    <Footer/>
+    </div>
   );
 }

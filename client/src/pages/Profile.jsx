@@ -36,7 +36,7 @@ export default function Profile() {
   const [userListings,setUserListings]=useState([]);
   const [showListOn,setShowListOn]=useState(false);
   const dispatch = useDispatch();
-  console.log(formData);
+
   const [opened, {open, close}] = useDisclosure(false);
  
   useEffect(() => {
@@ -129,7 +129,7 @@ export default function Profile() {
       const res = await fetch("/api/auth/signout");
       const data = await res.json();
       if (data.success === false) {
-        toast.error("Sign out failed")
+        toast.error("failed to Log out")
         dispatch(deleteUserFailure(data.message));
 
         return;
