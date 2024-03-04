@@ -336,7 +336,7 @@ export default function Profile() {
 </div>
         
      <div className='flex flex-col mt-0 flex-1 gap-4'>
-      <img className="w-auto object-cover h-50  rounded-md" src="../../image3.jpg" alt="" />
+      <img className="w-auto object-cover h-50 hidden sm:block rounded-md" src="../../image3.jpg" alt="" />
      <Link
           className="bg-green-700 text-white p-3 mt-[1px] rounded-lg uppercase text-center  hover:opacity-90"
           to={"/create-listing"}
