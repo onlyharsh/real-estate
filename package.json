@@ -5,9 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+
     "start": "node api/index.js",
-    "dev": "nodemon api/index.js"
-    
+    "dev": "nodemon api/index.js",
+    "build" : "npm run build --prefix ./client",
+    "serve" : "npm run build && npm run start"
 
   },
   "keywords": [],
