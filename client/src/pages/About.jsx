@@ -20,7 +20,7 @@ export default function About() {
       <div className='flex flex-col'>
         
       
-        <img className='h-[120px] w-[200px]' src="../../public/sign.jpg" alt="Harsh Raj Sign" />
+        <img className='h-[120px] w-[200px]' src="../../sign.jpg" alt="Harsh Raj Sign" />
         <p className=' text-slate-800  text-xl  '>Harsh Raj</p>
       <p className=' text-slate-800  text-xl  '>Founder &amp; Developer</p>
 
