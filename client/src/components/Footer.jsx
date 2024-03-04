@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-column text-center text-gray-500 mt-6">
-        &copy; 2024 HARS Estate. All rights reserved.
+        &copy; 2024 TrendyHomes. All rights reserved.
       </div>
     </footer>
   );

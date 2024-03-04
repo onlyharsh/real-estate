@@ -6,7 +6,7 @@ function Type() {
     <Typewriter
       options={{
         strings: [
-            '<span style="color: #ff0000;">HARS</span> Estate'
+            '<span style="color: #ff0000;">Trendy</span>Homes'
            
         ],
         autoStart: true,

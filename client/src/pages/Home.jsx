@@ -70,7 +70,7 @@ const HomePage = () => {
           <Type/>
         </h1>
         <div className='text-gray-500 text-xs sm:text-sm'>
-        Welcome to HARS Estate, your destination for finding your dream home. 
+        Welcome to TrendyHomes, your destination for finding your dream home. 
           <br />
           
          Explore our diverse range of properties and discover your perfect place to live today!
