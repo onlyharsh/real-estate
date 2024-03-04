@@ -19,8 +19,8 @@ export default function Header() {
       <div className="flex items-center justify-between max-w-6xl p-4 mx-auto">
         <Link to="/" onClick={closeSidebar}> {/* Close sidebar when navigating to home */}
           <h1 className="flex-wrap text-sm font-bold sm:text-xl">
-          <span style={{ color: '#ff0000' }}>HARS </span>
-            <span className="text-slate-700">Estate</span>
+          <span style={{ color: '#ff0000' }}>Trendy</span>
+            <span className="text-slate-700">Homes</span>
           </h1>
         </Link>
 
