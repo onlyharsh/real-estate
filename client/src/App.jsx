@@ -12,6 +12,7 @@ import Listing from './pages/Listing';
 import Search from './pages/Search'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ShowListing from './pages/ShowListing';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
         <Route element={<PrivateRoute/>}>
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/create-listing' element={<CreListing/>}/>
+        <Route path='/showlisting' element={<ShowListing/>}/>
         <Route path='/update-listing/:listingId' element={<UpdateListing/>}/>
 
 
@@ -41,10 +43,10 @@ export default function App() {
 
       </Routes>
       <ToastContainer
-        className="flex flex-col  fixed bottom-10 right-10 z-50"
-        toastClassName="bg-red-100 text-gray-800 font-semibold rounded-md shadow-md p-4 mb-4"
-        position="top-center"
-        autoClose={3000}
+        className="flex flex-col  fixed bottom-10 right-10 z-50 p-3 sm:p-0"
+        toastClassName="bg-red-100 text-gray-800 font-semibold rounded-md shadow-md p-2 sm:p-4 mb-4"
+        position="bottom-center"
+        autoClose={1000}
         hideProgressBar
         closeButton={false}
         pauseOnHover={false}

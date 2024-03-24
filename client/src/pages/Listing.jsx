@@ -66,8 +66,8 @@ export default function Listing() {
   };
 
   return (
-    <div className='bg-cover bg-center h-[410px] sm:h-[500px]'>
-    <main className="p-2 mt-1">
+    <div className='bg-cover bg-center h-[410px] sm:h-[500px] '>
+    <main className="p-3 mt-1 ">
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
@@ -75,8 +75,8 @@ export default function Listing() {
       {listing && !loading && !error && (
          <div>
           <div>
-         <div className="relative">
-           <div className="flex items-center h-[350px] sm:h-[550px] w-full mx-auto sm:w-[70%]">
+         <div className="relative ">
+           <div className="flex items-center h-[350px] sm:h-[550px] w-full mx-auto sm:w-[70%] ">
              <FontAwesomeIcon
                icon={faCircleArrowLeft}
                onClick={() => handleMove("l")}
@@ -109,7 +109,7 @@ export default function Listing() {
            </div>
          </div>
          {copied && (
-           <p className='fixed top-[130px] sm:top-[16%] right-8 sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
+           <p className='fixed top-[110px] sm:top-[16%] right-3 sm:right-[8%] z-10 rounded-md bg-gray-700 text-gray-200 p-2'>
              Link copied!
            </p>
          )}
@@ -118,9 +118,9 @@ export default function Listing() {
 
         
          
-          <div className='max-w-5xl mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
+          <div className='max-w-[66rem] mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
           <h2 className='text-2xl font-semibold text-gray-800'>
-  <span className='text-2xl text-red-600'> ₹{listing.offer ? (+listing.regularPrice - +listing.discountPrice) : listing.regularPrice.toLocaleString('en-US')}
+  <span className='text-2xl text-red-600'> ₹{listing.offer ? (+listing.regularPrice - +listing.discountPrice).toLocaleString('en-US') : listing.regularPrice.toLocaleString('en-US')}
   {listing.type === 'rent' && ' /month'}</span>
 </h2>
 <span className='text-xl '>{listing.name}</span>

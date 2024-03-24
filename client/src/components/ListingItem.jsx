@@ -21,9 +21,9 @@ export default function ListingItem({ listing }) {
           </div>
           <p className='text-sm text-gray-600 line-clamp-2'>{listing.description}</p>
           <p className='text-red-500 mt-2 font-semibold'>
-          <b>₹</b>{listing.offer
-              ? listing.discountPrice.toLocaleString('en-US')
-              : listing.regularPrice.toLocaleString('en-US')}
+          <b>₹</b>
+               {listing.regularPrice.toLocaleString('en-US')}
+             
             {listing.type === 'rent' && ' / month'}
           </p>
           <div className='text-slate-700 flex gap-4'>
@@ -32,6 +32,9 @@ export default function ListingItem({ listing }) {
             </div>
             <div className='font-bold text-xs'>
               {listing.bathrooms > 1 ? `${listing.bathrooms} bathroom ` : `${listing.bathrooms} bathroom `}
+            </div>
+            <div className='font-bold text-xs'>
+              {+listing.discountPrice > 0 ? <span className='text-green-600'>Discount Available</span> : <span className='text-red-600'>No discount Available </span>}
             </div>
           </div>
         </div>

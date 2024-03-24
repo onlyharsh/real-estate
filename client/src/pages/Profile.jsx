@@ -143,8 +143,6 @@ export default function Profile() {
   };
 
   const handleShowListings = async () => {
-  
-   
  
     try {
       setShowListOn(!showListOn);
@@ -187,10 +185,10 @@ export default function Profile() {
   };
   return (
     <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
-       <main className="p-3 max-w-4xl mx-auto">
+       <main className="p-3 max-w-4xl mx-auto ">
     <Modal opened={opened} onClose={close} >
     { userListings && userListings.length > 0 && (
-        <div className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-4 '>
         <h1 className='text-center mb-3 text-2xl font-semibold'>Your Listings</h1>
         {userListings.map((listing) => (
           <div
@@ -338,14 +336,14 @@ export default function Profile() {
      <div className='flex flex-col mt-0 flex-1 gap-4'>
       <img className="w-auto object-cover h-50 hidden sm:block rounded-md" src="../../image3.jpg" alt="" />
      <Link
-          className="bg-green-700 text-white p-3 mt-[1px] rounded-lg uppercase text-center  hover:opacity-90"
+          className="bg-green-700 text-white p-3 mt-[1px] rounded-lg uppercase text-center  hover:opacity-90 hidden sm:block"
           to={"/create-listing"}
         >
           Create Listing
         </Link>
 
        
-   <button  onClick={handleShowListings} className='text-green-700 mt-0 sm:mt-5 w-full'>
+   <button  onClick={handleShowListings} className='text-green-700 mt-0 sm:mt-5 w-full hidden sm:block'>
         Show your listings
       </button>
       <p className='text-red-700 mt-5'>

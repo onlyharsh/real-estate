@@ -127,7 +127,7 @@ export default function Header() {
                 </Link>
               </li>
               <li className="text-gray-700 hover:underline">
-                <Link to="/profile" onClick={closeSidebar}>
+                <Link to="/showlisting" onClick={closeSidebar}>
                   My Listings
                 </Link>
               </li>
@@ -137,7 +137,7 @@ export default function Header() {
                   About
                 </Link>
               </li>
-              <li>
+           { currentUser? ( <li>
                 <button
                   onClick={handleSignOut}
                   style={{color:'#ff0000'}}
@@ -145,10 +145,10 @@ export default function Header() {
                 >
                   Log out
                 </button>
-              </li>
-              <li className='text-sm mt-[300px]'>
-                version-3.0.1
-              </li>
+              </li>):(null)}
+              <div className='text-sm absolute bottom-5'>
+    version-3.0.1
+  </div>
             </ul>
           </div>
         )}
