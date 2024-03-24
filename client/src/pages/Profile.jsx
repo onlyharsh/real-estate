@@ -175,7 +175,7 @@ export default function Profile() {
         console.log(data.message);
         return;
       }
-
+      toast.success('Listing deleted successfully');
       setUserListings((prev) =>
         prev.filter((listing) => listing._id !== listingId)
       );

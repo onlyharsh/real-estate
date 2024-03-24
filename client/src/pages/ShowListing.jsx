@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from "../components/Footer";
-
+import {toast} from "react-toastify"
 export default function ShowListing() {
     const { currentUser } = useSelector((state) => state.user);
     const [userListings, setUserListings] = useState([]);
@@ -18,7 +18,7 @@ export default function ShowListing() {
             console.log(data.message);
             return;
           }
-    
+          toast.success('Listing deleted successfully');
           setUserListings((prev) =>
             prev.filter((listing) => listing._id !== listingId)
           );
