@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaPhone, FaEnvelope } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function Contact({ listing }) {
   const [landlord, setLandlord] = useState(null);
   const [message, setMessage] = useState('');
-
+  
   const onChange = (e) => {
     setMessage(e.target.value);
   };
@@ -23,18 +23,21 @@ export default function Contact({ listing }) {
     fetchLandlord();
   }, [listing.userRef]);
 
+ 
+
+  
   return (
     <>
       {landlord && (
         <div className='flex flex-col gap-4 '>
  <p className="text-gray-800 font-semibold text-lg mt-[15px]">
-  To inquire about <span className="text-red-500">{listing.name.toLowerCase()}</span>,
-  please contact <span className="text-red-500">{landlord.username}</span>:
+  To inquire about <span className="text-red-600">{listing.name}</span>,
+  please contact: <span className="text-red-600">{landlord.name.toUpperCase()}</span>
 </p>
           <div className='bg-gray-100 border border-gray-300 p-3 rounded-lg flex items-center justify-between'>
             <div>
               <p className='font-semibold text-gray-800'>Phone Number:</p>
-              <p className='text-red-500'>{landlord.phone}</p>
+              <p className='text-red-600'>{landlord.phone}</p>
             </div>
             <button
               className='bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 flex items-center'
@@ -43,7 +46,40 @@ export default function Contact({ listing }) {
               <FaPhone className='mr-2' />
               Call
             </button>
+
           </div>
+          <div className='bg-gray-100 border border-gray-300 p-3 rounded-lg flex items-center justify-between'>
+  <div className='overflow-x-auto'>
+    <p className='font-semibold text-gray-800'>Address:</p>
+    <p className='text-red-600 overflow-auto'>{listing.address}</p>
+    <br />
+    
+  </div>
+  <button
+  className='bg-gray-700 text-white px-4 py-2 rounded-lg hover:bg-gray-600 flex items-center justify-center hidden sm:flex'
+  onClick={() => {
+    const addressQuery = encodeURIComponent(listing.address);
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${addressQuery}`;
+    window.open(googleMapsUrl, '_blank');
+  }}
+>
+  <FaMapMarkerAlt className='mr-2' />
+  <span>Open in Maps</span>
+</button>
+
+</div>
+<button
+    className='bg-gray-700 text-white  justify-center px-4 py-3  rounded-lg hover:bg-gray-600 flex items-center  sm:hidden' 
+    onClick={() => {
+      const addressQuery = encodeURIComponent(listing.address);
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${addressQuery}`;
+      window.open(googleMapsUrl, '_blank');
+    }}
+  >
+    <FaMapMarkerAlt className='mr-2 ' />
+    Open address in Maps
+  </button>
+
           <div className='bg-gray-100 border border-gray-300 p-3 rounded-lg'>
             <p className='font-semibold text-gray-800'>Message:</p>
             <textarea

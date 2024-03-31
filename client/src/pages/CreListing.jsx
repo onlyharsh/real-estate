@@ -19,6 +19,9 @@ export default function CreateListing() {
     name: "",
     description: "",
     address: "",
+    city:"",
+    locality:"",
+    state:"",
     type: "rent",
     bedrooms: 1,
     bathrooms: 1,
@@ -171,7 +174,7 @@ export default function CreateListing() {
         <div className="flex flex-col gap-4 flex-1">
           <input
             type="text"
-            placeholder="Name"
+            placeholder="Flat type or name"
             className="border p-3 rounded-lg"
             id="name"
             maxLength="62"
@@ -190,9 +193,36 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.description}
           />
-          <input
+           <input
             type="text"
-            placeholder="Address"
+            placeholder="City"
+            className="border p-3 rounded-lg"
+            id="city"
+            required
+            onChange={handleChange}
+            value={formData.city}
+          />
+           <input
+            type="text"
+            placeholder="Locality"
+            className="border p-3 rounded-lg"
+            id="locality"
+            required
+            onChange={handleChange}
+            value={formData.locality}
+          />
+           <input
+            type="text"
+            placeholder="State"
+            className="border p-3 rounded-lg"
+            id="state"
+            required
+            onChange={handleChange}
+            value={formData.state}
+          />
+          <textarea
+            type="text"
+            placeholder="Complete address"
             className="border p-3 rounded-lg"
             id="address"
             required

@@ -22,6 +22,7 @@ import {
   FaShare,
 } from 'react-icons/fa';
 import Footer from '../components/Footer';
+import { useSetState } from '@mantine/hooks';
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
@@ -91,16 +92,18 @@ export default function Listing() {
 
     setSlideNumber(newSlideNumber)
   };
-
+const [load,setLoad]=useState(false);
 
   const makePayment = async (e) => {
     if (userData.payment === true) {
       setContact(true);
       return;
     } 
+    
     try {
-     
-      const response = await fetch("https://trendyhomeshrs.onrender.com/order", {
+     setLoad(true);
+      const response = await fetch("http://localhost:3000/order", {
+        
         method: "POST",
         body: JSON.stringify({
           amount: 50000,
@@ -111,10 +114,11 @@ export default function Listing() {
           "Content-Type": "application/json",
         },
       });
-
+  
       const data = await response.json();
       setDataResponse(data);
-
+      setLoad(false);
+  
       // Proceed if payment request was successful
       var options = {
         "key": "rzp_test_CI0M0SNtL3FtoV", // Enter the Key ID generated from the Dashboard
@@ -148,36 +152,15 @@ export default function Listing() {
           "email": currentUser.email,
           "contact": currentUser.phone
         },
-        "notes": {
-          "address": "Razorpay Corporate Office"
-        },
         "theme": {
-          "color": "#3399cc"
-        },
-        "modal": {
-          "ondismiss": function() {
-            toast.warning('Transaction Cancelled!')
-          }
-        },
-        "modal": {
-          "escape": false,
-          "animation": {
-            "duration": 0,
-            "open": "animated fadeInDown",
-            "close": "animated fadeOutUp"
-          }
-        },
-        "modal": {
-          "type": "frame",
-          "template": "<iframe src='https://trendyhomeshrs.com/terms-and-conditions' width='100%' height='100%' frameborder='0'></iframe>"
+          "color": "#2c3a4b" // Custom color for the payment button
         }
       };
-      
-
+  
       var rzp1 = new window.Razorpay(options);
       rzp1.on('payment.failed', function (response) {
         // Error handling...
-      toast.error("Payment failed! Please try again.")
+        toast.error("Payment failed! Please try again.")
       });
       rzp1.open();
       e.preventDefault();
@@ -186,7 +169,7 @@ export default function Listing() {
       console.error("Error making payment:", error);
     }
   };
-
+  
 
   return (
     <div className='bg-cover bg-center h-[410px] sm:h-[500px] '>
@@ -247,10 +230,10 @@ export default function Listing() {
   {listing.type === 'rent' && ' /month'}</span>
 </h2>
 <span className='text-xl '>{listing.name}</span>
-  <p className='flex items-center gap-2 text-gray-600 text-sm'>
-    <FaMapMarkerAlt className='text-green-700' />
-    {listing.address}
-  </p>
+<p className='flex items-center gap-2 text-gray-600 text-sm overflow-x-auto'>
+  <FaMapMarkerAlt className='text-green-700' />
+  <span>{listing.locality}, {listing.city}, {listing.state}</span>
+</p>
   <div className='flex gap-4'>
     <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
       {listing.type === 'rent' ? 'For Rent' : 'For Sale'}
@@ -288,15 +271,15 @@ export default function Listing() {
   listing.userRef !== currentUser._id && !contact && (
     <div>
       {userData && userData.payment === false && (
-        <p className="text-gray-600 text-sm mb-2">
-          Please make a <b>one time payment of INR 500</b> to see the owner's contact details.
+        <p className="text-black text-sm mb-2">
+          Please make a <b>one time payment of INR 500</b> to see complete address and owner's contact details.
         </p>
       )}
       <button
         onClick={makePayment}
         className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
       >
-        {userData && userData.payment === false ?  'Make Payment':'Contact landlord' }
+        {userData && userData.payment === false ? (load?( 'processing'):('make payment')):'Contact landlord' }
       </button>
     </div>
   )
