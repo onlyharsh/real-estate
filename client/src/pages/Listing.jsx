@@ -148,7 +148,7 @@ const [load,setLoad]=useState(false);
           }
         },
         "prefill": {
-          "name": currentUser.username,
+          "name": currentUser.name,
           "email": currentUser.email,
           "contact": currentUser.phone
         },
@@ -279,7 +279,7 @@ const [load,setLoad]=useState(false);
         onClick={makePayment}
         className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
       >
-        {userData && userData.payment === false ? (load?( 'processing'):('make payment')):'Contact landlord' }
+        {userData && userData.payment === false ? (load?('processing'):('make payment')):'Contact landlord' }
       </button>
     </div>
   )
