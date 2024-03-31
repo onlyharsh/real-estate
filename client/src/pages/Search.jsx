@@ -253,7 +253,7 @@ export default function Search() {
           )}
           {loading && (
             <p className='text-xl text-slate-700 text-center w-full'>
-              Loading...
+              <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
             </p>
           )}
 

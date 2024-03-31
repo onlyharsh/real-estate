@@ -191,7 +191,7 @@ export default function Listing() {
   return (
     <div className='bg-cover bg-center h-[410px] sm:h-[500px] '>
     <main className="p-3 mt-1 ">
-      {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
+      {loading && <p className='text-center my-7 text-2xl'><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
