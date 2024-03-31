@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Contact from '../components/Contact';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {toast} from "react-toastify"
+
 import {
   faCircleArrowLeft,
   faCircleArrowRight,
@@ -23,14 +25,16 @@ import Footer from '../components/Footer';
 
 export default function Listing() {
   const [listing, setListing] = useState(null);
+  const [userData,setUserData]=useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
+  const [dataResponse,setDataResponse]=useState(null);
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const [slideNumber, setSlideNumber] = useState(0);
-
+  const navigate=useNavigate();
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -53,6 +57,29 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+
+  useEffect(() => {
+    const fetchListing = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/user/${currentUser?._id}`);
+        const data = await res.json();
+        if (data.success === false) {
+          return;
+        }
+        setUserData(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if (currentUser) {
+      fetchListing();
+    }
+  }, [currentUser?._id]);
+  
+
   const handleMove = (direction) => {
     let newSlideNumber;
 
@@ -64,6 +91,102 @@ export default function Listing() {
 
     setSlideNumber(newSlideNumber)
   };
+
+
+  const makePayment = async (e) => {
+    if (userData.payment === true) {
+      setContact(true);
+      return;
+    } 
+    try {
+     
+      const response = await fetch("http://localhost:3000/order", {
+        method: "POST",
+        body: JSON.stringify({
+          amount: 50000,
+          currency: "INR",
+          receipt: "djfdkjf"
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await response.json();
+      setDataResponse(data);
+
+      // Proceed if payment request was successful
+      var options = {
+        "key": "rzp_test_CI0M0SNtL3FtoV", // Enter the Key ID generated from the Dashboard
+        "amount": 50000,
+        "currency": "INR",
+        "name": "TrendyHomes", // Your business name
+        "description": "Secure your dream home with TrendyHomes",
+        "image": "https://firebasestorage.googleapis.com/v0/b/hrs-estate.appspot.com/o/investment.png?alt=media&token=21ea533c-3612-46af-b9bc-4a4b78e740bd",
+        "order_id": data.id, // Use the id directly from the response
+        "handler": async function (response) {
+          toast.success('Transaction Successful!')
+          try {
+            // Update currentUser.payment after successful payment
+            const updatedUser = { ...currentUser, payment: true }; // Copying currentUser and updating payment
+            console.log(updatedUser)
+            const userUpdateResponse = await fetch(`/api/user/update/${currentUser._id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedUser),
+            });
+            const userData = await userUpdateResponse.json();
+            setUserData(userData);
+          } catch (error) {
+            console.error("Error updating user payment:", error);
+          }
+        },
+        "prefill": {
+          "name": currentUser.username,
+          "email": currentUser.email,
+          "contact": currentUser.phone
+        },
+        "notes": {
+          "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+          "color": "#3399cc"
+        },
+        "modal": {
+          "ondismiss": function() {
+            toast.warning('Transaction Cancelled!')
+          }
+        },
+        "modal": {
+          "escape": false,
+          "animation": {
+            "duration": 0,
+            "open": "animated fadeInDown",
+            "close": "animated fadeOutUp"
+          }
+        },
+        "modal": {
+          "type": "frame",
+          "template": "<iframe src='https://trendyhomeshrs.com/terms-and-conditions' width='100%' height='100%' frameborder='0'></iframe>"
+        }
+      };
+      
+
+      var rzp1 = new window.Razorpay(options);
+      rzp1.on('payment.failed', function (response) {
+        // Error handling...
+      toast.error("Payment failed! Please try again.")
+      });
+      rzp1.open();
+      e.preventDefault();
+    } catch (error) {
+      toast.error(error)
+      console.error("Error making payment:", error);
+    }
+  };
+
 
   return (
     <div className='bg-cover bg-center h-[410px] sm:h-[500px] '>
@@ -160,15 +283,35 @@ export default function Listing() {
       {listing.furnished ? 'Furnished' : 'Unfurnished'}
     </li>
   </ul>
-  {currentUser && listing.userRef !== currentUser._id && !contact && (
-              <button
-                onClick={() => setContact(true)}
-                className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
-              >
-                Contact landlord
-              </button>
-            )}
-            {contact && <Contact listing={listing} />}
+  {currentUser ? (
+  // If user is logged in
+  listing.userRef !== currentUser._id && !contact && (
+    <div>
+      {userData && userData.payment === false && (
+        <p className="text-gray-600 text-sm mb-2">
+          Please make a <b>one time payment of INR 500</b> to see the owner's contact details.
+        </p>
+      )}
+      <button
+        onClick={makePayment}
+        className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
+      >
+        {userData && userData.payment === false ?  'Make Payment':'Contact landlord' }
+      </button>
+    </div>
+  )
+) : (
+  // If user is not logged in
+  <button
+    onClick={()=> navigate('/sign-in') }
+    className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
+  >
+    Login to see details
+  </button>
+)}
+
+
+{contact && <Contact listing={listing} />}
 </div>
 
         </div>

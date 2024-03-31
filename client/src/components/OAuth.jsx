@@ -27,6 +27,10 @@ export default function OAuth() {
       });
       const data = await res.json();
       dispatch(signInSuccess(data));
+      if (redirectUrl) {
+        navigate(redirectUrl)
+      }
+      
       toast.success("Logged in successfully")
       navigate('/');
     } catch (error) {
