@@ -134,7 +134,7 @@ const [load,setLoad]=useState(false);
             // Update currentUser.payment after successful payment
             const updatedUser = { ...currentUser, payment: true }; // Copying currentUser and updating payment
             console.log(updatedUser)
-            const userUpdateResponse = await fetch(`/api/user/update/${currentUser._id}`, {
+            const userUpdateResponse = await fetch(`https://trendyhomeshrs.onrender.com/api/user/update/${currentUser._id}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
