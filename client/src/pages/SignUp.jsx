@@ -57,8 +57,8 @@ export default function SignUp() {
         />
         <input
           type="text"
-          placeholder="name"
-          className="border p-3 rounded-lg"
+          placeholder="Name"
+          className="border capitalize p-3 rounded-lg"
           id="name"
           onChange={handleChange}
         />
@@ -87,7 +87,7 @@ export default function SignUp() {
           disabled={loading}
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div> : "Sign Up"}
+          {loading ? "loading" : "Sign Up"}
         </button>
         <OAuth />
       </form>

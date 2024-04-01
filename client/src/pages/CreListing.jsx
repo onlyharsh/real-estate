@@ -175,7 +175,7 @@ export default function CreateListing() {
           <input
             type="text"
             placeholder="Flat type or name"
-            className="border p-3 rounded-lg"
+            className="border capitalize p-3 rounded-lg"
             id="name"
             maxLength="62"
             minLength="3"
@@ -187,7 +187,7 @@ export default function CreateListing() {
           <textarea
             type="text"
             placeholder="Description"
-            className="border p-3 rounded-lg"
+            className="border  p-3 rounded-lg"
             id="description"
             required
             onChange={handleChange}
@@ -196,7 +196,7 @@ export default function CreateListing() {
            <input
             type="text"
             placeholder="City"
-            className="border p-3 rounded-lg"
+            className="border capitalize p-3 rounded-lg"
             id="city"
             required
             onChange={handleChange}
@@ -205,7 +205,7 @@ export default function CreateListing() {
            <input
             type="text"
             placeholder="Locality"
-            className="border p-3 rounded-lg"
+            className="border capitalize p-3 rounded-lg"
             id="locality"
             required
             onChange={handleChange}
@@ -214,7 +214,7 @@ export default function CreateListing() {
            <input
             type="text"
             placeholder="State"
-            className="border p-3 rounded-lg"
+            className="border capitalize p-3 rounded-lg"
             id="state"
             required
             onChange={handleChange}
@@ -223,7 +223,7 @@ export default function CreateListing() {
           <textarea
             type="text"
             placeholder="Complete address"
-            className="border p-3 rounded-lg"
+            className="border capitalize p-3 rounded-lg"
             id="address"
             required
             onChange={handleChange}

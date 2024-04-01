@@ -71,7 +71,7 @@ export default function SignIn() {
           disabled={loading}
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
         >
-          {loading ? <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>: "Log In"}
+          {loading ? "loading": "Log In"}
         </button>
         <OAuth />
       </form>
