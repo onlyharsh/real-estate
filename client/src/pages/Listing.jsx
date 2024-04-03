@@ -102,7 +102,7 @@ const [load,setLoad]=useState(false);
     
     try {
      setLoad(true);
-      const response = await fetch("http://localhost:3000/order", {
+      const response = await fetch("https://trendyhomeshrs.onrender.com/order", {
         
         method: "POST",
         body: JSON.stringify({
