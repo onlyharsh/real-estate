@@ -134,7 +134,7 @@ export default function Header() {
 
               <li className="text-gray-700 hover:underline">
                 <Link to="/about" onClick={closeSidebar}>
-                  About
+                  About us
                 </Link>
               </li>
            { currentUser? ( <li>
@@ -158,7 +158,7 @@ export default function Header() {
             <Link to="/" onClick={closeSidebar}>Home</Link>
           </li>
           <li className="text-gray-700 hover:underline">
-            <Link to="/about" onClick={closeSidebar}>About</Link>
+            <Link to="/about" onClick={closeSidebar}>About </Link>
           </li>
           <Link
             onClick={handleChange}
