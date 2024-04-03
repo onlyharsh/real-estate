@@ -102,7 +102,7 @@ const [load,setLoad]=useState(false);
     
     try {
      setLoad(true);
-      const response = await fetch("https://trendyhomeshrs.onrender.com/order", {
+      const response = await fetch("http://localhost:3000/order", {
         
         method: "POST",
         body: JSON.stringify({
@@ -133,7 +133,7 @@ const [load,setLoad]=useState(false);
           try {
             // Update currentUser.payment after successful payment
             const updatedUser = { ...currentUser, payment: true }; // Copying currentUser and updating payment
-            console.log(updatedUser)
+          
             const userUpdateResponse = await fetch(`/api/user/update/${currentUser._id}`, {
               method: "POST",
               headers: {
@@ -141,7 +141,9 @@ const [load,setLoad]=useState(false);
               },
               body: JSON.stringify(updatedUser),
             });
+          
             const userData = await userUpdateResponse.json();
+            console.log(userData)
             setUserData(userData);
           } catch (error) {
             console.error("Error updating user payment:", error);

@@ -23,13 +23,13 @@ export default function OAuth() {
           name: result.user.displayName,
           email: result.user.email,
           photo: result.user.photoURL,
+          phone:''
         }),
       });
       const data = await res.json();
+    
       dispatch(signInSuccess(data));
-      if (redirectUrl) {
-        navigate(redirectUrl)
-      }
+    
       
       toast.success("Logged in successfully")
       navigate('/');
@@ -38,6 +38,8 @@ export default function OAuth() {
       console.log('could not sign in with google', error);
     }
   };
+
+
   return (
     <button
     onClick={handleGoogleClick}

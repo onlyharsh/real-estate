@@ -25,7 +25,6 @@ export default function Contact({ listing }) {
 
  
 
-  
   return (
     <>
       {landlord && (

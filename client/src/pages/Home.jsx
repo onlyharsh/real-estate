@@ -14,8 +14,6 @@ const HomePage = () => {
    const navigate=useNavigate();
 
 
-
-   console.log(offerListings);
    useEffect(() => {
      const fetchOfferListings = async () => {
        try {

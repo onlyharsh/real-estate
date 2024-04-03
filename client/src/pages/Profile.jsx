@@ -305,6 +305,7 @@ export default function Profile() {
           type="phone"
           placeholder="Contact No."
           onChange={handleChange}
+          defaultValue={currentUser.phone}
           id="phone"
           className="border p-3 rounded-lg"
         />
