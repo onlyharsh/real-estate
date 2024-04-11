@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import {AiOutlineEye,AiOutlineEyeInvisible} from 'react-icons/ai'
 import {
   signInStart,
   signInSuccess,
@@ -12,7 +13,7 @@ import {toast} from "react-toastify"
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
-
+  const [showPassword,setShowPassword]=useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleChange = (e) => {
@@ -47,6 +48,10 @@ export default function SignIn() {
       // dispatch(signInFailure(error.message));
     }
   };
+
+  const handleShowPassword=()=>{
+     setShowPassword(!showPassword);
+  }
   return (
     <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
         <div className="p-3 max-w-lg mx-auto">
@@ -59,14 +64,19 @@ export default function SignIn() {
           id="username"
           onChange={handleChange}
         />
-        <input
-          type="password"
+        <div className='relative flex '>
+           <input
+          type={showPassword? 'text' : 'password'}
           placeholder="Password"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg w-full"
           id="password"
           onChange={handleChange}
         />
-
+        <span onClick={handleShowPassword} className="cursor-pointer absolute right-3 top-3.5 ">
+        {showPassword?< AiOutlineEyeInvisible fontSize={24}/> :<AiOutlineEye fontSize={24}/>}
+        </span>
+        </div>
+       
         <button
           disabled={loading}
           className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"

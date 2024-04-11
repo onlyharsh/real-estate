@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 import Footer from "../components/Footer";
 import {toast} from "react-toastify"
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 export default function SignUp() {
+  const [showPassword,setShowPassword]=useState(false);
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -14,7 +16,9 @@ export default function SignUp() {
       [e.target.id]: e.target.value,
     });
   };
-  
+  const handleShowPassword=()=>{
+    setShowPassword(!showPassword);
+ }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -69,13 +73,18 @@ export default function SignUp() {
           id="email"
           onChange={handleChange}
         />
-        <input
-          type="password"
+        <div className='relative flex '>
+           <input
+          type={showPassword? 'text' : 'password'}
           placeholder="Password"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg w-full"
           id="password"
           onChange={handleChange}
         />
+        <span onClick={handleShowPassword} className="cursor-pointer absolute right-3 top-3.5 ">
+        {showPassword?< AiOutlineEyeInvisible fontSize={24}/> :<AiOutlineEye fontSize={24}/>}
+        </span>
+        </div>
            <input
           type="text"
           placeholder="Contact No."
