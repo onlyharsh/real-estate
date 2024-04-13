@@ -21,7 +21,7 @@ export default function ListingItem({ listing }) {
           </div>
           <p className='text-sm text-gray-600 line-clamp-2'>{listing.description}</p>
           <p className='text-red-500 mt-2 font-semibold'>
-          <b>₹</b>
+          ₹
                {listing.regularPrice.toLocaleString('en-US')}
              
             {listing.type === 'rent' && ' / month'}

@@ -308,10 +308,12 @@ export default function CreateListing() {
                 <p>Regular price</p>
                 {formData.type === "rent" && (
                   <span className="text-xs">
-                    ( <b>₹</b> / month)
+                    (₹ / month)
                   </span>
                 )}
+                
               </div>
+              
             </div>
             {formData.offer && (
               <div className="flex items-center gap-2">
@@ -330,13 +332,20 @@ export default function CreateListing() {
 
                   {formData.type === "rent" && (
                     <span className="text-xs">
-                      ( <b>₹</b>/ month)
+                      ( ₹ / month)
                     </span>
                   )}
                 </div>
               </div>
             )}
           </div>
+          <button
+            disabled={loading || uploading}
+            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          >
+            {loading ? "Updating..." : "Update listing"}
+          </button>
+          {error && <p className="text-red-700 text-sm">{error}</p>}
         </div>
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold mx-2 text-gray-800">Note:</p>
@@ -423,13 +432,7 @@ export default function CreateListing() {
                 </button>
               </div>
             ))}
-          <button
-            disabled={loading || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
-          >
-            {loading ? "Updating..." : "Update listing"}
-          </button>
-          {error && <p className="text-red-700 text-sm">{error}</p>}
+        
         </div>
       </form>
     </main>

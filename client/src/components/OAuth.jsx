@@ -44,7 +44,7 @@ export default function OAuth() {
     <button
     onClick={handleGoogleClick}
     type='button'
-    className='flex items-center justify-center gap-2 bg-white-700 text-gray-700 outline p-3 rounded-lg uppercase hover:opacity-95'
+    className='w-full flex items-center justify-center gap-2 bg-white-700 text-gray-700 outline p-3 rounded-lg uppercase hover:opacity-95'
   >
     <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" className="w-6 h-6" />
     Continue with Google

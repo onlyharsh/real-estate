@@ -242,7 +242,7 @@ const [load,setLoad]=useState(false);
     </p>
     {listing.offer && (
       <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
-        <b>₹</b>{listing.discountPrice} OFF
+        ₹ {listing && listing.discountPrice.toLocaleString('en-US')} OFF
       </p>
     )}
   </div>

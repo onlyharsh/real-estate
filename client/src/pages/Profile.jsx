@@ -36,7 +36,7 @@ export default function Profile() {
   const [userListings,setUserListings]=useState([]);
   const [showListOn,setShowListOn]=useState(false);
   const dispatch = useDispatch();
-
+  const [deleteListingId, setDeleteListingId] = useState(null);
   const [opened, {open, close}] = useDisclosure(false);
  
   useEffect(() => {
@@ -102,6 +102,13 @@ export default function Profile() {
       dispatch(updateUserFailure(error.message));
     }
   };
+  const openDeleteConfirmation = (currentUser)=> {
+    setDeleteListingId(currentUser);
+  };
+
+  const closeDeleteConfirmation = () => {
+    setDeleteListingId(null);
+  };
 
   const handleDeleteUser = async () => {
     try {
@@ -116,7 +123,9 @@ export default function Profile() {
         return;
       }
       toast.success('Account deleted successfully');
+      setDeleteListingId(null);
       dispatch(deleteUserSuccess(data));
+     
     } catch (error) {
       toast.error("Error deleting account");
       dispatch(deleteUserFailure(error.message));
@@ -142,28 +151,28 @@ export default function Profile() {
     }
   };
 
-  const handleShowListings = async () => {
+  // const handleShowListings = async () => {
  
-    try {
-      setShowListOn(!showListOn);
-      setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
-      const data = await res.json();
+  //   try {
+  //     setShowListOn(!showListOn);
+  //     setShowListingsError(false);
+  //     const res = await fetch(`/api/user/listings/${currentUser._id}`);
+  //     const data = await res.json();
      
-      if (data.success === false) {
-        setShowListingsError(true);
-        return;
-      }
+  //     if (data.success === false) {
+  //       setShowListingsError(true);
+  //       return;
+  //     }
       
-      setUserListings(data);
-      open();
-      console.log(userListings)
+  //     setUserListings(data);
+  //     open();
+  //     console.log(userListings)
    
-    } catch (error) {
+  //   } catch (error) {
     
-      setShowListingsError(true);
-    }
-  };
+  //     setShowListingsError(true);
+  //   }
+  // };
    
   const handleListingDelete = async (listingId) => {
     try {
@@ -226,12 +235,9 @@ export default function Profile() {
         
       )}
     </Modal>
-      <h1
-        className="text-3xl font-semibold text-center
-     my-7"
-      >
-        Profile
-      </h1>
+    <h1 className="text-4xl font-bold text-center my-7 text-gray-800">
+  <span className="text-red-500">My</span> Profile
+</h1>
       <div className="flex flex-col sm:flex-row gap-1 sm:gap-20  ">
       <div className="flex flex-col gap-4 flex-1">
         <input
@@ -319,7 +325,7 @@ export default function Profile() {
         </button>
         <div className="flex justify-between mt-5">
         <span
-          onClick={handleDeleteUser}
+          onClick={()=>openDeleteConfirmation(currentUser._id)}
           className="text-red-700 cursor-pointer"
         >
           Delete account
@@ -344,9 +350,11 @@ export default function Profile() {
         </Link>
 
        
-   <button  onClick={handleShowListings} className='text-green-700 mt-0 sm:mt-5 w-full hidden sm:block'>
+    <Link className='text-green-700 mt-0 sm:mt-5 w-full hidden sm:block'
+    to={"/showlisting"}
+    >
         Show your listings
-      </button>
+    </Link>
       <p className='text-red-700 mt-5'>
         {showListingsError ? 'Error showing listings' : ''}
       </p>
@@ -356,7 +364,22 @@ export default function Profile() {
      
         </div>
 
-      
+        {deleteListingId && (
+        <div className='fixed inset-0 z-50 flex items-center p-3 justify-center bg-gray-900 bg-opacity-50'>
+          <div className='bg-white p-6 rounded-lg'>
+            <h2 className='text-xl font-semibold mb-4'>Confirm Deletion</h2>
+            <p className='text-gray-600 mb-4'>Are you sure you want to delete this listing? This action cannot be undone.</p>
+            <div className='flex justify-end'>
+              <button onClick={closeDeleteConfirmation} className='bg-gray-300 text-gray-700 px-4 py-2 rounded mr-4 hover:bg-gray-400'>
+                Cancel
+              </button>
+              <button onClick={handleDeleteUser} className='bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600'>
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+      )} 
 
     </main>
     <Footer/>

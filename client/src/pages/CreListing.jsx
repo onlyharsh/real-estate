@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   getDownloadURL,
   getStorage,
@@ -162,11 +163,17 @@ export default function CreateListing() {
     }
   };
   return (
-    <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
+    
+    <div class="flex items-center justify-center min-h-screen">
+    <div
+      class="relative flex flex-col m-2 sm:m-4  sm:pr-20 sm:pl-20 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0"
+    >
      <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">
-        Create Listing
-      </h1>
+
+     <h1 className="text-4xl font-bold text-center my-7 text-gray-800">
+  <span className="text-red-500">Create</span> Listing
+</h1>
+
       <form
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-20 "
@@ -448,8 +455,8 @@ export default function CreateListing() {
         </div>
       </form>
     </main>
-    <Footer/>
-    </div>
+  </div>
+  </div>
     
   );
 }

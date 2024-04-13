@@ -48,28 +48,36 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
-       <div className="p-3 max-w-lg mx-auto">
-      <h1 className="text-3xl text-center font-semibold my-7">Sign Up</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <div>
+    <div class="flex items-center justify-center min-h-screen">
+    <div
+      class="relative flex flex-col m-6 space-y-8 bg-white shadow-2xl rounded-2xl md:flex-row md:space-y-0"
+    >
+     
+      <div class="flex flex-col justify-center p-5 md:p-14">
+        <span class="mb-3 text-4xl font-bold">Welcome</span>
+        <span class="font-light text-gray-500 mb-8">
+          Please Signup to explore TrendyHomes
+        </span>
+        <form onSubmit={handleSubmit} className="w-[280px] sm:w-[300px]">
         <input
           type="text"
           placeholder="Username"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg w-full mb-2"
           id="username"
           onChange={handleChange}
         />
         <input
           type="text"
           placeholder="Name"
-          className="border capitalize p-3 rounded-lg"
+          className="border capitalize p-3 rounded-lg w-full mb-2"
           id="name"
           onChange={handleChange}
         />
         <input
           type="email"
           placeholder="Email"
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg w-full mb-2"
           id="email"
           onChange={handleChange}
         />
@@ -77,39 +85,59 @@ export default function SignUp() {
            <input
           type={showPassword? 'text' : 'password'}
           placeholder="Password"
-          className="border p-3 rounded-lg w-full"
+          className="border p-3 rounded-lg w-full mb-2"
           id="password"
           onChange={handleChange}
         />
         <span onClick={handleShowPassword} className="cursor-pointer absolute right-3 top-3.5 ">
-        {showPassword?< AiOutlineEyeInvisible fontSize={24}/> :<AiOutlineEye fontSize={24}/>}
+        {showPassword?< AiOutlineEyeInvisible fontSize={20}/> :<AiOutlineEye fontSize={20}/>}
         </span>
         </div>
            <input
           type="text"
           placeholder="Contact No."
-          className="border p-3 rounded-lg"
+          className="border p-3 rounded-lg w-full mb-4"
           id="phone"
           onChange={handleChange}
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80 w-full mb-3"
         >
           {loading ? "loading" : "Sign Up"}
         </button>
         <OAuth />
       </form>
-      <div className="flex gap-2 mt-5">
-        <p>Have an account?</p>
+      
+  
+      <div className="flex gap-2 mt-3 text-sm">
+        <p>Already have an account?</p>
         <Link to={"/sign-in"}>
-          <span className="text-blue-700">Log in</span>
+          <span className="text-blue-700"><u>Log in</u></span>
         </Link>
       </div>
-      {error && <p className="text-red-500 mt-5">{error}</p>}
+      </div>
+    
+      <div class="relative">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/hrs-estate.appspot.com/o/image.jpg?alt=media&token=697c7592-5cf6-4267-81a4-71640b74c38a"
+          alt="img"
+          class="w-[400px] h-full hidden rounded-r-2xl md:block object-cover"
+        />
+    
+        <div
+          class="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block"
+        >
+          <span class="text-white text-xl"
+            >We've been uesing Untitle to kick"<br />start every new project
+            and can't <br />imagine working without it."
+          </span>
+        </div>
+      </div>
     </div>
-    <Footer/>
-    </div>
+  </div>
+  <Footer/>
+   </div>
    
   );
 }
