@@ -180,7 +180,7 @@ export default function Profile() {
 
         
 
-        <p className="text-sm self-center">
+        <p className="text-sm text-center">
           {fileUploadError ? (
             fileUploadError == "Image successfully uploaded!" ? (
               <span className="text-green-700">{fileUploadError}</span>
