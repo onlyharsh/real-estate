@@ -35,6 +35,7 @@ export default function Listing() {
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [isPaid,setIsPaid]=useState(false);
   const navigate=useNavigate();
   useEffect(() => {
     const fetchListing = async () => {
@@ -102,7 +103,7 @@ const [load,setLoad]=useState(false);
     
     try {
      setLoad(true);
-      const response = await fetch("http://localhost:3000/order", {
+      const response = await fetch("https://trendyhomeshrs.onrender.com/order", {
         
         method: "POST",
         body: JSON.stringify({
@@ -131,9 +132,8 @@ const [load,setLoad]=useState(false);
         "handler": async function (response) {
           toast.success('Transaction Successful!')
           try {
-            // Update currentUser.payment after successful payment
-            const updatedUser = { ...currentUser, payment: true }; // Copying currentUser and updating payment
-          
+            // Update currentUser.payment to true after successful payment
+            const updatedUser = { ...currentUser, payment: true };
             const userUpdateResponse = await fetch(`/api/user/update/${currentUser._id}`, {
               method: "POST",
               headers: {
@@ -141,11 +141,28 @@ const [load,setLoad]=useState(false);
               },
               body: JSON.stringify(updatedUser),
             });
-          
+
             const userData = await userUpdateResponse.json();
-           
             setUserData(userData);
-          } catch (error) {
+             setIsPaid(true);
+            // Schedule payment reset after 10 minutes
+            setTimeout(async () => {
+              const resetUser = { ...currentUser, payment: false };
+              const resetUserResponse = await fetch(`/api/user/update/${currentUser._id}`, {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(resetUser),
+              });
+
+              const resetUserData = await resetUserResponse.json();
+              setUserData(resetUserData);
+
+              // Notify user about payment reset
+              toast.info('Payment status reset. Please make payment again.');
+            },  24*60*60*1000);}
+             catch (error) {
             console.error("Error updating user payment:", error);
           }
         },
@@ -273,15 +290,25 @@ const [load,setLoad]=useState(false);
   listing.userRef !== currentUser._id && !contact && (
     <div>
       {userData && userData.payment === false && (
+      isPaid ? (
+     
         <p className="text-black text-sm mb-2">
-          Please make a <b>one time payment of INR 500</b> to see complete address and owner's contact details.
-        </p>
+        Your subscription has expired. Please renew your payment to continue accessing unlimited contact details.
+      </p>
+    ) : (
+      // Render if user has not made the payment yet
+      <p className="text-black text-sm mb-2 mt-10">
+        Please make a <b>one-time payment of INR 500</b> to see complete address and owner's contact details.
+        This payment will provide unlimited access to contact details for a year.
+      </p>
+     )
+    
       )}
       <button
         onClick={makePayment}
         className='bg-slate-700 w-full text-white rounded-lg  hover:opacity-95 p-3'
       >
-        {userData && userData.payment === false ? (load?('Processing'):('Make Payment')):'Contact Landlord' }
+        {userData && userData.payment === false ? (load?('Processing'):(isPaid?('Renew Payment'):('Make Payment'))):'Contact Landlord' }
       </button>
     </div>
   )

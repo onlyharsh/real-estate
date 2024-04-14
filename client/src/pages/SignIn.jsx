@@ -118,10 +118,10 @@ export default function SignIn() {
         <div
           class="absolute hidden bottom-10 right-6 p-6 bg-white bg-opacity-30 backdrop-blur-sm rounded drop-shadow-lg md:block"
         >
-          <span class="text-white text-xl"
-            >We've been uesing Untitle to kick"<br />start every new project
-            and can't <br />imagine working without it."
-          </span>
+          <span class="text-white text-xl left-4">
+  "Untitle has been invaluable for <br /> our  real estate projects, property <br /> listings,  and client interactions."
+</span>
+
         </div>
       </div>
     </div>
