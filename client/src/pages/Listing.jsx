@@ -102,7 +102,7 @@ const [load,setLoad]=useState(false);
     
     try {
      setLoad(true);
-      const response = await fetch("https://trendyhomeshrs.onrender.com/order", {
+      const response = await fetch("http://localhost:3000/order", {
         
         method: "POST",
         body: JSON.stringify({
@@ -143,7 +143,7 @@ const [load,setLoad]=useState(false);
             });
           
             const userData = await userUpdateResponse.json();
-            console.log(userData)
+           
             setUserData(userData);
           } catch (error) {
             console.error("Error updating user payment:", error);
@@ -228,8 +228,8 @@ const [load,setLoad]=useState(false);
          
           <div className='max-w-[66rem] mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
           <h2 className='text-2xl font-semibold text-gray-800'>
-  <span className='text-2xl text-red-600'> ₹{listing.offer ? (+listing.regularPrice - +listing.discountPrice).toLocaleString('en-US') : listing.regularPrice.toLocaleString('en-US')}
-  {listing.type === 'rent' && ' /month'}</span>
+  <span className='text-2xl text-red-600'> ₹ {listing.offer ? (+listing.regularPrice - +listing.discountPrice).toLocaleString('en-US') : listing.regularPrice.toLocaleString('en-US')}
+  {listing.type === 'rent' && '/month'}</span>
 </h2>
 <span className='text-xl '>{listing.name}</span>
 <p className='flex items-center gap-2 text-gray-600 text-sm overflow-x-auto'>
@@ -279,9 +279,9 @@ const [load,setLoad]=useState(false);
       )}
       <button
         onClick={makePayment}
-        className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
+        className='bg-slate-700 w-full text-white rounded-lg  hover:opacity-95 p-3'
       >
-        {userData && userData.payment === false ? (load?('processing'):('make payment')):'Contact landlord' }
+        {userData && userData.payment === false ? (load?('Processing'):('Make Payment')):'Contact Landlord' }
       </button>
     </div>
   )
@@ -289,7 +289,7 @@ const [load,setLoad]=useState(false);
   // If user is not logged in
   <button
     onClick={()=> navigate('/sign-in') }
-    className='bg-slate-700 w-full text-white rounded-lg uppercase hover:opacity-95 p-3'
+    className='bg-slate-700 w-full text-white rounded-lg  hover:opacity-95 p-3'
   >
     Login to see details
   </button>

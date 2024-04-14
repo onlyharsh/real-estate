@@ -176,10 +176,10 @@ export default function CreateListing() {
   };
   return (
     <div className="bg-cover bg-center h-[410px] sm:h-[500px]">
-         <main className="p-3 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-semibold text-center my-7">
-        Update Listing
-      </h1>
+         <main className="p-3 max-w-4xl mx-auto mb-8">
+         <h1 className="text-4xl font-bold text-center my-7 text-gray-800">
+  <span className="text-red-500">Update</span> Listing
+</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-20 "
@@ -341,7 +341,7 @@ export default function CreateListing() {
           </div>
           <button
             disabled={loading || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            className="p-3 bg-slate-700 text-white rounded-lg  hover:opacity-95 disabled:opacity-80"
           >
             {loading ? "Updating..." : "Update listing"}
           </button>
@@ -387,7 +387,7 @@ export default function CreateListing() {
               type="button"
               disabled={uploading}
               onClick={handleImageSubmit}
-              className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
+              className="p-3 text-green-700 border border-green-700 rounded  hover:shadow-lg disabled:opacity-80"
             >
               {uploading ? "Uploading..." : "Upload"}
             </button>
@@ -426,7 +426,7 @@ export default function CreateListing() {
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}
-                  className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+                  className="p-3 text-red-700 rounded-lg  hover:opacity-75"
                 >
                   Delete
                 </button>
@@ -441,3 +441,19 @@ export default function CreateListing() {
  
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

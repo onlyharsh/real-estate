@@ -64,6 +64,9 @@ export default function ShowListing() {
 
   return (
     <div className='mt-8 p-2 smp-3 max-w-4xl mx-auto'>
+       <h1 className="text-4xl font-bold text-center mb-8 text-gray-800">
+  <span className="text-red-500">My</span> Listings
+</h1>
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 '>
         {userListings.map((listing) => (
           <div key={listing._id} className='border rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:scale-105'>
@@ -134,7 +137,7 @@ export default function ShowListing() {
             </p>
             <Link
               to='/create-listing'
-              className='bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg uppercase transition duration-300 ease-in-out'
+              className='bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg  transition duration-300 ease-in-out'
             >
               Create Listing
             </Link>

@@ -178,7 +178,7 @@ export default function CreateListing() {
         onSubmit={handleSubmit}
         className="flex flex-col sm:flex-row gap-20 "
       >
-        <div className="flex flex-col gap-4 flex-1">
+        <div className="flex flex-col gap-2 flex-1">
           <input
             type="text"
             placeholder="Flat type or name"
@@ -236,6 +236,7 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.address}
           />
+          <hr className="mt-4 mb-2" />
           <div className="flex gap-6 flex-wrap">
             <div className="flex gap-2">
               <input
@@ -288,7 +289,7 @@ export default function CreateListing() {
               <span>Offer</span>
             </div>
           </div>
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-3">
             <div className="flex items-center gap-2">
               <input
                 type="number"
@@ -359,6 +360,7 @@ export default function CreateListing() {
               </div>
             )}
           </div>
+          <hr className="mt-4 mb-2" />
         </div>
         <div className="flex flex-col flex-1 gap-4">
           <p className="font-semibold mx-2 text-gray-800">Note:</p>
@@ -400,7 +402,7 @@ export default function CreateListing() {
               type="button"
               disabled={uploading}
               onClick={handleImageSubmit}
-              className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
+              className="p-3 text-green-700 border border-green-700 rounded  hover:shadow-lg disabled:opacity-80"
             >
               {uploading ? "Uploading..." : "Upload"}
             </button>
@@ -439,7 +441,7 @@ export default function CreateListing() {
                 <button
                   type="button"
                   onClick={() => handleRemoveImage(index)}
-                  className="p-3 text-red-700 rounded-lg uppercase hover:opacity-75"
+                  className="p-3 text-red-700 rounded-lg  hover:opacity-75"
                 >
                   Delete
                 </button>
@@ -447,7 +449,7 @@ export default function CreateListing() {
             ))}
           <button
             disabled={loading || uploading}
-            className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
+            className="p-3 bg-slate-700 text-white rounded-lg  hover:opacity-95 disabled:opacity-80"
           >
             {loading ? "Creating..." : "Create listing"}
           </button>
