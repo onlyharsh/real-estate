@@ -42,7 +42,7 @@ export default function App() {
         </Route>
 
       </Routes>
-      <ToastContainer
+      <ToastContainer 
         className="flex flex-col  fixed bottom-10 right-10 z-50 p-3 sm:p-0"
         toastClassName="bg-red-100 text-gray-800 font-semibold rounded-md shadow-md p-2 sm:p-4 mb-4"
         position="bottom-center"
