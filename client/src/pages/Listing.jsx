@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaSearch, FaBars } from 'react-icons/fa';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -36,7 +36,9 @@ export default function Listing() {
   const { currentUser } = useSelector((state) => state.user);
   const [slideNumber, setSlideNumber] = useState(0);
   const [isPaid,setIsPaid]=useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const navigate=useNavigate();
+  const slideshowIntervalRef = useRef(null);
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -59,6 +61,25 @@ export default function Listing() {
     fetchListing();
   }, [params.listingId]);
 
+
+  useEffect(() => {
+    if (!isPaused) {
+      slideshowIntervalRef.current = setInterval(() => {
+        // Automatically move to the next slide if not paused
+        setSlideNumber((prevSlideNumber) => (prevSlideNumber + 1) % (listing?.imageUrls?.length || 1));
+      }, 2000); // Change slide every 5 seconds (adjustable)
+    } else {
+      clearInterval(slideshowIntervalRef.current);
+    }
+
+    return () => {
+      clearInterval(slideshowIntervalRef.current); // Clean up interval on component unmount
+    };
+  }, [isPaused, listing?.imageUrls]);
+
+  const handleImageClick = () => {
+    setIsPaused((prevIsPaused) => !prevIsPaused); // Toggle pause/resume on image click
+  };
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -201,7 +222,8 @@ const [load,setLoad]=useState(false);
          <div>
           <div>
          <div className="relative ">
-           <div className="flex items-center h-[350px] sm:h-[550px] w-full mx-auto sm:w-[70%] ">
+           <div className="flex items-center h-[350px] sm:h-[550px] w-full mx-auto sm:w-[70%] " 
+            onClick={handleImageClick}>
              <FontAwesomeIcon
                icon={faCircleArrowLeft}
                onClick={() => handleMove("l")}
@@ -240,7 +262,19 @@ const [load,setLoad]=useState(false);
          )}
        </div>
      
-
+          
+       <div className="flex justify-center mt-4">
+              {listing.imageUrls && listing.imageUrls.map((url, index) => (
+                <div
+                  key={index}
+                  className={`h-2 w-2 sm:h-4 sm:w-4 mx-1 rounded-full cursor-pointer ${index === slideNumber ? 'bg-gray-800' : 'bg-gray-400'}`}
+                  onClick={() => {
+                    setSlideNumber(index);
+                    setIsPaused(true); // Pause slideshow when navigating to a specific slide
+                  }}
+                />
+              ))}
+            </div>
         
          
           <div className='max-w-[66rem] mx-auto p-3 my-7 space-y-4 bg-gray-100 rounded-lg shadow-md'>
